@@ -4,12 +4,12 @@ on:
       - main
 
 jobs:
-  wait_for_any_without_code_scanning_enabled:
-    name: Build GitHub Action
+  wait_for_any:
+    name: Wait for any issues
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -20,21 +20,21 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
   
   wait_for_any_with_code_scanning_enabled:
-    name: Build GitHub Action
+    name: Wait for any issues when code scanning is enabled
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -45,23 +45,23 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for any issues
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
           code_scanning_alerts: true
           github_token: ${{ github.token }}
   
   wait_for_high_with_code_scanning_enabled:
-    name: Build GitHub Action
+    name: Wait for high issues when code scanning is enabled
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -72,24 +72,24 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for high issues
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
           code_scanning_alerts: true
           wait_for: high
           github_token: ${{ github.token }}
 
-  wait_for_low_with_code_scanning_enabled:
-    name: Build GitHub Action
+  wait_for_any_with_code_scanning_enabled:
+    name: Wait for any issues when code scanning is enabled
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -100,24 +100,23 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for any issues
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
           code_scanning_alerts: true
-          wait_for: low
           github_token: ${{ github.token }}
   
-  wait_for_low_with_commit_sha_and_code_scanning_enabled:
-    name: Build GitHub Action
+  wait_for_any_with_commit_sha_and_code_scanning_enabled:
+    name: "Wait for any issues when code scanning is enabled (commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b)"
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -128,25 +127,24 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for any issues
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
           code_scanning_alerts: true
-          wait_for: low
           github_token: ${{ github.token }}
           commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b
 
-  wait_for_low_with_wrong_github_token_and_code_scanning_enabled:
-    name: Build GitHub Action
+  wait_for_any_with_wrong_github_token_and_code_scanning_enabled:
+    name: Wait for any issues when code scanning is enabled and wrong GitHub token
     runs-on: ubuntu-latest
     container: node:16
     steps:
-      - name: Nexploit Scan Start
+      - name: Scan Start
         id: start
         uses: NeuraLegion/run-scan@release
         with:
@@ -157,14 +155,13 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues ⏳
+      - name: Wait for any issues
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 300
+          timeout: 600
           code_scanning_alerts: true
-          wait_for: low
           github_token: test
