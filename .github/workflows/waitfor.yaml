@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  wait_for_medium:
+  wait_for_medium_retest:
     name: Wait for medium issues
     runs-on: ubuntu-latest
     container: node:16
@@ -16,7 +16,7 @@ jobs:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
           name: Sarif - wait-for test (NL-1020) - retest - ${{ github.sha }}
-          restart_scan: tBaNL3Kw6BLARPgww5gjaC
+          restart_scan: 64bq8UBC7ssmSoAaSEtdXn
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
@@ -25,6 +25,8 @@ jobs:
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
           wait_for: medium
+          code_scanning_alerts: true
+          github_token: ${{ secrets.GITHUb_TOKEN }}
   
 #   wait_for_any_with_code_scanning_enabled:
 #     name: Wait for any issues when code scanning is enabled
