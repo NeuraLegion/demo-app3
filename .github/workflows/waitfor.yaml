@@ -16,7 +16,7 @@ jobs:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
           name: Sarif - wait-for test (NL-1020) - retest - ${{ github.sha }}
-          restart_scan: sHDHb53REnhXXFJD38omR4
+          restart_scan: tBaNL3Kw6BLARPgww5gjaC
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
