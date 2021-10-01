@@ -15,11 +15,8 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
-          discovery_types: |
-            [ "archive" ]
-          module: 'dast'
-          file_id: xiAnxPimcn6v8khFv5FcvA
+          name: Sarif - wait-for test (NL-1020) - retest - ${{ github.sha }}
+          restart_scan: sHDHb53REnhXXFJD38omR4
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
@@ -29,111 +26,111 @@ jobs:
           scan: ${{ steps.start.outputs.id }}
           wait_for: medium
   
-  wait_for_any_with_code_scanning_enabled:
-    name: Wait for any issues when code scanning is enabled
-    runs-on: ubuntu-latest
-    container: node:16
-    steps:
-      - name: Scan Start
-        id: start
-        uses: NeuraLegion/run-scan@release
-        with:
-          api_token: ${{ secrets.NEXPLOIT_TOKEN}}
-          hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
-          discovery_types: |
-            [ "archive" ]
-          module: 'dast'
-          file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for breakpoint
-        id: wait
-        uses: NeuraLegion/wait-for@release
-        with:
-          api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
-          hostname: development.playground.nexploit.app
-          scan: ${{ steps.start.outputs.id }}
-          wait_for: any
-          code_scanning_alerts: true
-          github_token: ${{ github.token }}
+#   wait_for_any_with_code_scanning_enabled:
+#     name: Wait for any issues when code scanning is enabled
+#     runs-on: ubuntu-latest
+#     container: node:16
+#     steps:
+#       - name: Scan Start
+#         id: start
+#         uses: NeuraLegion/run-scan@release
+#         with:
+#           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
+#           hostname: development.playground.nexploit.app
+#           name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
+#           discovery_types: |
+#             [ "archive" ]
+#           module: 'dast'
+#           file_id: xiAnxPimcn6v8khFv5FcvA
+#       - name: Wait for breakpoint
+#         id: wait
+#         uses: NeuraLegion/wait-for@release
+#         with:
+#           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
+#           hostname: development.playground.nexploit.app
+#           scan: ${{ steps.start.outputs.id }}
+#           wait_for: any
+#           code_scanning_alerts: true
+#           github_token: ${{ github.token }}
   
-  wait_for_high_with_code_scanning_enabled:
-    name: Wait for high issues when code scanning is enabled
-    runs-on: ubuntu-latest
-    container: node:16
-    steps:
-      - name: Scan Start
-        id: start
-        uses: NeuraLegion/run-scan@release
-        with:
-          api_token: ${{ secrets.NEXPLOIT_TOKEN}}
-          hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
-          discovery_types: |
-            [ "archive" ]
-          module: 'dast'
-          file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for breakpoint
-        id: wait
-        uses: NeuraLegion/wait-for@release
-        with:
-          api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
-          hostname: development.playground.nexploit.app
-          scan: ${{ steps.start.outputs.id }}
-          code_scanning_alerts: true
-          wait_for: high
-          github_token: ${{ github.token }}
+#   wait_for_high_with_code_scanning_enabled:
+#     name: Wait for high issues when code scanning is enabled
+#     runs-on: ubuntu-latest
+#     container: node:16
+#     steps:
+#       - name: Scan Start
+#         id: start
+#         uses: NeuraLegion/run-scan@release
+#         with:
+#           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
+#           hostname: development.playground.nexploit.app
+#           name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
+#           discovery_types: |
+#             [ "archive" ]
+#           module: 'dast'
+#           file_id: xiAnxPimcn6v8khFv5FcvA
+#       - name: Wait for breakpoint
+#         id: wait
+#         uses: NeuraLegion/wait-for@release
+#         with:
+#           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
+#           hostname: development.playground.nexploit.app
+#           scan: ${{ steps.start.outputs.id }}
+#           code_scanning_alerts: true
+#           wait_for: high
+#           github_token: ${{ github.token }}
   
-  wait_for_any_with_commit_sha_and_code_scanning_enabled:
-    name: "Wait for any issues when code scanning is enabled (commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b)"
-    runs-on: ubuntu-latest
-    container: node:16
-    steps:
-      - name: Scan Start
-        id: start
-        uses: NeuraLegion/run-scan@release
-        with:
-          api_token: ${{ secrets.NEXPLOIT_TOKEN}}
-          hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
-          discovery_types: |
-            [ "archive" ]
-          module: 'dast'
-          file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for breakpoint
-        id: wait
-        uses: NeuraLegion/wait-for@release
-        with:
-          api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
-          hostname: development.playground.nexploit.app
-          scan: ${{ steps.start.outputs.id }}
-          code_scanning_alerts: true
-          wait_for: any
-          github_token: ${{ github.token }}
-          commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b
+#   wait_for_any_with_commit_sha_and_code_scanning_enabled:
+#     name: "Wait for any issues when code scanning is enabled (commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b)"
+#     runs-on: ubuntu-latest
+#     container: node:16
+#     steps:
+#       - name: Scan Start
+#         id: start
+#         uses: NeuraLegion/run-scan@release
+#         with:
+#           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
+#           hostname: development.playground.nexploit.app
+#           name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
+#           discovery_types: |
+#             [ "archive" ]
+#           module: 'dast'
+#           file_id: xiAnxPimcn6v8khFv5FcvA
+#       - name: Wait for breakpoint
+#         id: wait
+#         uses: NeuraLegion/wait-for@release
+#         with:
+#           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
+#           hostname: development.playground.nexploit.app
+#           scan: ${{ steps.start.outputs.id }}
+#           code_scanning_alerts: true
+#           wait_for: any
+#           github_token: ${{ github.token }}
+#           commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b
 
-  wait_for_any_with_wrong_github_token_and_code_scanning_enabled:
-    name: Wait for any issues when code scanning is enabled and wrong GitHub token
-    runs-on: ubuntu-latest
-    container: node:16
-    steps:
-      - name: Scan Start
-        id: start
-        uses: NeuraLegion/run-scan@release
-        with:
-          api_token: ${{ secrets.NEXPLOIT_TOKEN}}
-          hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
-          discovery_types: |
-            [ "archive" ]
-          module: 'dast'
-          file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for breakpoint
-        id: wait
-        uses: NeuraLegion/wait-for@release
-        with:
-          api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
-          hostname: development.playground.nexploit.app
-          scan: ${{ steps.start.outputs.id }}
-          wait_for: any
-          code_scanning_alerts: true
-          github_token: test
+#   wait_for_any_with_wrong_github_token_and_code_scanning_enabled:
+#     name: Wait for any issues when code scanning is enabled and wrong GitHub token
+#     runs-on: ubuntu-latest
+#     container: node:16
+#     steps:
+#       - name: Scan Start
+#         id: start
+#         uses: NeuraLegion/run-scan@release
+#         with:
+#           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
+#           hostname: development.playground.nexploit.app
+#           name: Sarif - wait-for test (NL-1020) - ${{ github.sha }}
+#           discovery_types: |
+#             [ "archive" ]
+#           module: 'dast'
+#           file_id: xiAnxPimcn6v8khFv5FcvA
+#       - name: Wait for breakpoint
+#         id: wait
+#         uses: NeuraLegion/wait-for@release
+#         with:
+#           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
+#           hostname: development.playground.nexploit.app
+#           scan: ${{ steps.start.outputs.id }}
+#           wait_for: any
+#           code_scanning_alerts: true
+#           github_token: test
