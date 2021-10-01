@@ -4,8 +4,8 @@ on:
       - main
 
 jobs:
-  wait_for_any:
-    name: Wait for any issues
+  wait_for_medium:
+    name: Wait for medium issues
     runs-on: ubuntu-latest
     container: node:16
     steps:
@@ -27,7 +27,7 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 600
+          wait_for: medium
   
   wait_for_any_with_code_scanning_enabled:
     name: Wait for any issues when code scanning is enabled
@@ -45,14 +45,14 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues
+      - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 600
+          wait_for: any
           code_scanning_alerts: true
           github_token: ${{ github.token }}
   
@@ -72,14 +72,13 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for high issues
+      - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 600
           code_scanning_alerts: true
           wait_for: high
           github_token: ${{ github.token }}
@@ -100,15 +99,15 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues
+      - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 600
           code_scanning_alerts: true
+          wait_for: any
           github_token: ${{ github.token }}
           commit_sha: 9b941601f13cfac2b8014d2559d8afd5e1979f4b
 
@@ -128,13 +127,13 @@ jobs:
             [ "archive" ]
           module: 'dast'
           file_id: xiAnxPimcn6v8khFv5FcvA
-      - name: Wait for any issues
+      - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          timeout: 600
+          wait_for: any
           code_scanning_alerts: true
           github_token: test
