@@ -26,7 +26,7 @@ jobs:
           scan: ${{ steps.start.outputs.id }}
           wait_for: medium
           code_scanning_alerts: true
-          github_token: ${{ secrets.GITHUb_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
   
 #   wait_for_any_with_code_scanning_enabled:
 #     name: Wait for any issues when code scanning is enabled
