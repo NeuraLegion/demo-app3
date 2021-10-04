@@ -15,11 +15,11 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - high - bc - ${{ github.sha }}
+          name: Sarif (wait-for, NL-1020) - high - no issues found, stop scan - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
-            [ "https://brokencrystals.com" ]
+            [ "http://ee04-2a02-a317-2145-2800-b5d5-5b0c-2b21-9f73.ngrok.io" ]
           module: 'dast'
       - name: Wait for breakpoint
         id: wait
