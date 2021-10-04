@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  wait_for_high_then_stop_bc:
+  wait_for_low_no_alerts_on:
     name: Wait for high issues, then stop
     runs-on: ubuntu-latest
     container: node:16
@@ -15,7 +15,7 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif (wait-for, NL-1020) - high - no issues found by timeout - ${{ github.sha }}
+          name: Sarif (wait-for, NL-1020) - any, codeScanningAlerts:false - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
@@ -28,10 +28,10 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          wait_for: high
-          code_scanning_alerts: true
+          wait_for: low
+          code_scanning_alerts: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          timeout: 300
+          timeout: 240
 #       - name: Nexploit Stop Scan
 #         uses: NeuraLegion/stop-scan@release
 #         with:
