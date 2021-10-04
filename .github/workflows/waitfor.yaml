@@ -4,8 +4,8 @@ on:
       - main
 
 jobs:
-  wait_for_low_no_alerts_on:
-    name: Wait for low issues, no codeScaniingAlerts
+  wait_for:
+    name: Wait for any issues, gh-int + code_scanning_alerts on
     runs-on: ubuntu-latest
     container: node:16
     steps:
@@ -16,7 +16,7 @@ jobs:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
           name: Sarif (wait-for, NL-1020) - any, with csa, timeout 600 - ${{ github.sha }}
-          restart_scan: w5EfKGoEiMrknHGQVawB52
+          restart_scan: ekRvS6ZftB9x64LRtcfsNA
 #           discovery_types: |
 #             [ "crawler" ]
 #           crawler_urls: |
