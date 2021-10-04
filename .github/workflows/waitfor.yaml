@@ -21,7 +21,7 @@ jobs:
 #             [ "crawler" ]
 #           crawler_urls: |
 #             [ "http://ee04-2a02-a317-2145-2800-b5d5-5b0c-2b21-9f73.ngrok.io" ]
-          module: 'dast'
+#           module: 'dast'
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
