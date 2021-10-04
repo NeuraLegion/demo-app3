@@ -4,8 +4,8 @@ on:
       - main
 
 jobs:
-  wait_for_medium_retest:
-    name: Wait for medium issues
+  wait_for_high_then_stop_bc:
+    name: Wait for high issues, then stop
     runs-on: ubuntu-latest
     container: node:16
     steps:
@@ -15,8 +15,12 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif - wait-for test (NL-1020) - retest - ${{ github.sha }}
-          restart_scan: 64bq8UBC7ssmSoAaSEtdXn
+          name: Sarif - wait-for test (NL-1020) - high - bc - ${{ github.sha }}
+          discovery_types: |
+            [ "crawler" ]
+          crawler_urls: |
+            [ "https://brokencrystals.com" ]
+          module: 'dast'
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
@@ -24,9 +28,15 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          wait_for: medium
+          wait_for: hight
           code_scanning_alerts: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Nexploit Stop Scan
+        uses: NeuraLegion/stop-scan@release
+        with:
+          api_token: ${{ secrets.NEXPLOIT_TOKEN }}
+          hostname: development.playground.nexploit.app
+          scan: ${{ steps.start.outputs.id }}
   
 #   wait_for_any_with_code_scanning_enabled:
 #     name: Wait for any issues when code scanning is enabled
