@@ -15,7 +15,7 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif (wait-for, NL-1020) - high - no issues found, stop scan - ${{ github.sha }}
+          name: Sarif (wait-for, NL-1020) - high - no issues found by timeout - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
@@ -28,15 +28,16 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          wait_for: hight
+          wait_for: high
           code_scanning_alerts: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Nexploit Stop Scan
-        uses: NeuraLegion/stop-scan@release
-        with:
-          api_token: ${{ secrets.NEXPLOIT_TOKEN }}
-          hostname: development.playground.nexploit.app
-          scan: ${{ steps.start.outputs.id }}
+          timeout: 300
+#       - name: Nexploit Stop Scan
+#         uses: NeuraLegion/stop-scan@release
+#         with:
+#           api_token: ${{ secrets.NEXPLOIT_TOKEN }}
+#           hostname: development.playground.nexploit.app
+#           scan: ${{ steps.start.outputs.id }}
   
 #   wait_for_any_with_code_scanning_enabled:
 #     name: Wait for any issues when code scanning is enabled
