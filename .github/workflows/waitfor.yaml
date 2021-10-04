@@ -15,7 +15,7 @@ jobs:
         with:
           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
           hostname: development.playground.nexploit.app
-          name: Sarif (wait-for, NL-1020) - low, no csa, timeout 600 - ${{ github.sha }}
+          name: Sarif (wait-for, NL-1020) - any, no csa, timeout 600 - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
@@ -28,7 +28,7 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          wait_for: low
+          wait_for: any
           code_scanning_alerts: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
           timeout: 600
