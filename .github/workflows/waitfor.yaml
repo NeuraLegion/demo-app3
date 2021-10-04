@@ -9,26 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     container: node:16
     steps:
-#       - name: Scan Start
-#         id: start
-#         uses: NeuraLegion/run-scan@release
-#         with:
-#           api_token: ${{ secrets.NEXPLOIT_TOKEN}}
-#           hostname: development.playground.nexploit.app
-#           name: Sarif (wait-for, NL-1020) - any, codeScanningAlerts:false - ${{ github.sha }}
-#           discovery_types: |
-#             [ "crawler" ]
-#           crawler_urls: |
-#             [ "http://ee04-2a02-a317-2145-2800-b5d5-5b0c-2b21-9f73.ngrok.io" ]
-#           module: 'dast'
+      - name: Scan Start
+        id: start
+        uses: NeuraLegion/run-scan@release
+        with:
+          api_token: ${{ secrets.NEXPLOIT_TOKEN}}
+          hostname: development.playground.nexploit.app
+          name: Sarif (wait-for, NL-1020) - low, no csa, timeout 600 - ${{ github.sha }}
+          discovery_types: |
+            [ "crawler" ]
+          crawler_urls: |
+            [ "http://ee04-2a02-a317-2145-2800-b5d5-5b0c-2b21-9f73.ngrok.io" ]
+          module: 'dast'
       - name: Wait for breakpoint
         id: wait
         uses: NeuraLegion/wait-for@release
         with:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
-          scan: dkCq5TDqoJbFNmhJoWDwyd
-#           scan: ${{ steps.start.outputs.id }}
+          scan: ${{ steps.start.outputs.id }}
           wait_for: low
           code_scanning_alerts: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
