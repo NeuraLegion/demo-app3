@@ -5,7 +5,7 @@ on:
 
 jobs:
   wait_for_low_no_alerts_on:
-    name: Wait for high issues, then stop
+    name: Wait for low issues, no codeScaniingAlerts
     runs-on: ubuntu-latest
     container: node:16
     steps:
@@ -31,7 +31,7 @@ jobs:
           wait_for: low
           code_scanning_alerts: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          timeout: 240
+          timeout: 360
 #       - name: Nexploit Stop Scan
 #         uses: NeuraLegion/stop-scan@release
 #         with:
