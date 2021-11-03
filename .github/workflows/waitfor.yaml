@@ -29,10 +29,10 @@ jobs:
           api_token:  ${{ secrets.NEXPLOIT_TOKEN }}
           hostname: development.playground.nexploit.app
           scan: ${{ steps.start.outputs.id }}
-          wait_for: high
+          wait_for: any
           code_scanning_alerts: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          timeout: 200
+          timeout: 2000
 #       - name: Nexploit Stop Scan
 #         uses: NeuraLegion/stop-scan@release
 #         with:
